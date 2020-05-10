@@ -11,7 +11,8 @@
     }
   ],
   "browser_action": {
-    "default_title": "Make this page stronk"
+    "default_title": "Make this page stronk",
+    "default_icon": "images/icon.png"
   },
   "manifest_version": 2
 }
