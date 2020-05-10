@@ -1,25 +1,27 @@
-const elements = document.querySelectorAll(
-  "h1, h2, h3, h4, h5, h6, p, li, td, caption, span"
-);
+const elements = [...document.body.getElementsByTagName("*")];
 
 const findAndReplace = (elements) => {
   elements.forEach((element) => {
-    replaceText(element);
+    element.childNodes.forEach((child) => {
+      if (child.nodeType === 3) {
+        replaceText(child);
+      }
+    });
   });
 };
 
-const replaceText = (text) => {
-  if (text.innerHTML.match(/strong/i)) {
-    text.innerHTML = text.innerHTML.replace(/STRONG/g, "STRONK");
-    text.innerHTML = text.innerHTML.replace(/STRONGER/g, "STRONKER");
-    text.innerHTML = text.innerHTML.replace(/STRONGEST/g, "STRONKEST");
-    text.innerHTML = text.innerHTML.replace(/Strong/g, "Stronk");
-    text.innerHTML = text.innerHTML.replace(/Stronger/g, "Stronker");
-    text.innerHTML = text.innerHTML.replace(/Strongest/g, "Stronkest");
-    text.innerHTML = text.innerHTML.replace(/strong/g, "stronk");
-    text.innerHTML = text.innerHTML.replace(/stronger/g, "stronker");
-    text.innerHTML = text.innerHTML.replace(/strongest/g, "stronkest");
-  }
+const replaceText = (node) => {
+  let value = node.nodeValue;
+  value = value.replace(/STRONG/g, "STRONK");
+  value = value.replace(/STRONGER/g, "STRONKER");
+  value = value.replace(/STRONGEST/g, "STRONKEST");
+  value = value.replace(/Strong/g, "Stronk");
+  value = value.replace(/Stronger/g, "Stronker");
+  value = value.replace(/Strongest/g, "Stronkest");
+  value = value.replace(/strong/g, "stronk");
+  value = value.replace(/stronger/g, "stronker");
+  value = value.replace(/strongest/g, "stronkest");
+  node.nodeValue = value;
 };
 
 findAndReplace(elements);
